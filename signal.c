@@ -14,11 +14,12 @@ HW10 -- Fire up the batSIGNAL
 
 static void sighandler(int signo) {
   int fd; 
-  char * buffer = "Got!"; 
+  char * buffer = "Received SIGINT!"; 
   //If the signal received is SIGINT
   if (signo == SIGINT) {
     fd = open("input_file", O_CREAT | O_WRONLY | O_EXCL, 0644);
-    write(fd, buffer, sizeof(buffer)); 
+    write(fd, buffer, sizeof(buffer) * 10);
+    close(fd);
     printf("\nProgram has exited due to SIGINT\n");
     exit(1); 
   }
